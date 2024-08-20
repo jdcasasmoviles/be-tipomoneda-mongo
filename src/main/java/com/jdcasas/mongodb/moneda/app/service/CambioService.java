@@ -1,13 +1,13 @@
 package com.jdcasas.mongodb.moneda.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.jdcasas.mongodb.moneda.app.domain.response.TipoCambioMonedaResponse;
 import com.jdcasas.mongodb.moneda.app.entity.CambioMoneda;
 import com.jdcasas.mongodb.moneda.app.infrastructure.IApiTipoCambio;
 import com.jdcasas.mongodb.moneda.app.repository.CambioRepository;
 import com.jdcasas.mongodb.moneda.app.utils.Utility;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 @Service
 public class CambioService implements ICambioService{
@@ -39,5 +39,9 @@ public class CambioService implements ICambioService{
 		 });
 	 }
 	
+	@Override
+	public Flux<CambioMoneda> findAll() {
+		return repository.findAll();
+	}
 }
 

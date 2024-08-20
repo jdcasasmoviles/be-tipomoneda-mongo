@@ -1,0 +1,29 @@
+version: "3.9"
+services:  
+  bs-tipocambio-mongo:
+    container_name: "container-tipocambio-mongo"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8084:8084
+    depends_on:
+      - mongo
+    networks:
+      - spring-network
+
+  mongo:
+    image: mongo:4.4.17
+    restart: always
+    container_name: contenedor_mongo
+    hostname: host-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27018:27017
+    networks:
+      - spring-network
+      
+networks:
+  spring-network:
